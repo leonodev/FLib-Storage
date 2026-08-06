@@ -1,0 +1,15 @@
+{
+  "originHash" : "635d695cac45d5beea0e54ac719e9d958d8ba5b3cce8885d79dd49642797689f",
+  "pins" : [
+    {
+      "identity" : "flib-utils",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/leonodev/FLib-Utils.git",
+      "state" : {
+        "revision" : "1cf52d0a73520129b3c30000ae1750446a823a7e",
+        "version" : "1.0.1"
+      }
+    }
+  ],
+  "version" : 3
+}
