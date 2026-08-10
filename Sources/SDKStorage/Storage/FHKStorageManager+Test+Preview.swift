@@ -8,8 +8,7 @@
 
 import Foundation
 import LocalAuthentication
-import FHKDomain
-import FHKUtils
+import FLibUtils
 
 extension FHKStorageManager {
     

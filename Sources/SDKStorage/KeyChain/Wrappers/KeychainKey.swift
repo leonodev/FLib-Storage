@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import FHKUtils
+import FLibUtils
 
 public enum KeychainKey: String, CaseIterable, Sendable {
     case authToken

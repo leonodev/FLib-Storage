@@ -16,7 +16,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/leonodev/FLib-Utils.git", .upToNextMajor(from: "1.0.1"))
+        .package(url: "https://github.com/leonodev/FLib-Utils.git", .upToNextMajor(from: "1.0.2"))
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -27,10 +27,6 @@ let package = Package(
                 // Modules FHK
                 .product(name: "FLibUtils", package: "FLib-Utils")
             ]
-        ),
-        .testTarget(
-            name: "FLibStorageTests",
-            dependencies: ["FLibStorage"]
-        ),
+        )
     ]
 )

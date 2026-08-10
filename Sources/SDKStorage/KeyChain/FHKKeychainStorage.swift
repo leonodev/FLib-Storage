@@ -7,8 +7,19 @@
 
 import Security
 import Foundation
-import FHKDomain
 import LocalAuthentication
+
+public protocol FHKKeychainProtocol: Sendable {
+    func save<T: Codable & Sendable>(_ value: T,
+                                     for key: String,
+                                     requireBiometry: Bool) throws
+    func read<T: Decodable & Sendable>(_ type: T.Type,
+                                        for key: String,
+                                        prompt: String?) throws -> T?
+    func delete(_ key: String) throws
+    func contains(_ key: String) -> Bool
+    func clearAll() throws
+}
 
 final public class FHKKeychainStorage: FHKKeychainProtocol {
     private let service = Bundle.main.bundleIdentifier ?? "com.fleon.fintechids"
@@ -105,7 +116,7 @@ private extension FHKKeychainStorage {
         SecItemDelete(query as CFDictionary)
         
         let status = SecItemAdd(query as CFDictionary, nil)
-        guard status == errSecSuccess else { throw KCError.from(status: status) }
+        guard status == errSecSuccess else { throw KeyChainError.from(status: status) }
     }
     
     func performReadData(for key: String, prompt: String? = nil) throws -> Data? {
@@ -124,7 +135,7 @@ private extension FHKKeychainStorage {
         case errSecSuccess: return item as? Data
         case errSecItemNotFound: return nil
         case errSecUserCanceled: return nil // Usuario canceló FaceID
-        default: throw KCError.from(status: status)
+        default: throw KeyChainError.from(status: status)
         }
     }
     
@@ -132,7 +143,7 @@ private extension FHKKeychainStorage {
         let query = baseQuery(for: key)
         let status = SecItemDelete(query as CFDictionary)
         guard status == errSecSuccess || status == errSecItemNotFound else {
-            throw KCError.from(status: status)
+            throw KeyChainError.from(status: status)
         }
     }
     

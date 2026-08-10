@@ -7,8 +7,7 @@
 
 import Foundation
 import LocalAuthentication
-import FHKDomain
-import FHKUtils
+import FLibUtils
 
 // MARK: - UserDefaults API
 extension FHKStorageManager {
