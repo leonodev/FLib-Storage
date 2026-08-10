@@ -17,9 +17,9 @@ public protocol FHKUserDefaultsProtocol: Sendable {
     func delete(forKey key: String) async throws
 }
 
-extension FHKStorageManager {
+public extension FHKStorageManager {
     
-    public static func live(userDefault: FHKUserDefaultsProtocol, keychain: FHKKeychainProtocol) -> Self {
+    static func live(userDefault: FHKUserDefaultsProtocol, keychain: FHKKeychainProtocol) -> Self {
         var manager = Self()
         
         manager.saveUserDefaultsData = { value, key in try await userDefault.save(value, forKey: key) }
