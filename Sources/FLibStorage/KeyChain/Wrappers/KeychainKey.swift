@@ -8,15 +8,6 @@
 import Foundation
 import FLibUtils
 
-public enum KeychainKey: String, CaseIterable, Sendable {
-    case authToken
-    case refreshToken
-    case userCredentials
-    case appSettings
-    case biometricData
-    case appLanguage
-}
-
 public struct Keychain: Sendable {
     // MARK: - Closures Internos (Trabajan con Data)
     public var saveData: @Sendable (_ data: Data, _ key: String, _ requireBiometry: Bool) throws -> Void
@@ -59,8 +50,8 @@ struct KeychainStored<T: Codable & Sendable>: Sendable {
     private let storage: Keychain
     private let requireBiometry: Bool
     
-    init(_ key: KeychainKey, storage: Keychain, requireBiometry: Bool = false) {
-        self.key = key.rawValue
+    init(_ key: String, storage: Keychain, requireBiometry: Bool = false) {
+        self.key = key
         self.storage = storage
         self.requireBiometry = requireBiometry
     }
@@ -92,8 +83,8 @@ struct KeychainString: Sendable {
     private let storage: Keychain
     private let requireBiometry: Bool
     
-    init(_ key: KeychainKey, storage: Keychain, requireBiometry: Bool = false) {
-        self.key = key.rawValue
+    init(_ key: String, storage: Keychain, requireBiometry: Bool = false) {
+        self.key = key
         self.storage = storage
         self.requireBiometry = requireBiometry
     }

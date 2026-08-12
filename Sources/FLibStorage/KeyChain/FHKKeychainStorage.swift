@@ -72,8 +72,20 @@ final public class FHKKeychainStorage: FHKKeychainProtocol {
     public func clearAll() throws {
         lock.lock()
         defer { lock.unlock() }
-        for key in KeychainKey.allCases {
-            try? performDelete(key.rawValue)
+        
+        let secItemClasses: [CFString] = [
+            kSecClassGenericPassword,
+            kSecClassInternetPassword,
+            kSecClassCertificate,
+            kSecClassKey,
+            kSecClassIdentity
+        ]
+        
+        for itemClass in secItemClasses {
+            let query: [String: Any] = [
+                kSecClass as String: itemClass
+            ]
+            SecItemDelete(query as CFDictionary)
         }
     }
     
